@@ -114,25 +114,54 @@
 	  color: #eee;
 	  }
 
-	  
+
+	  /* ===== vivo/国产浏览器专用视频修复 ===== */
 	  video {
+	  /* 强制硬件加速 & 防止合成层剥离 */
 	  -webkit-transform: translateZ(0) !important;
 	  transform: translateZ(0) !important;
 	  -webkit-backface-visibility: hidden !important;
 	  backface-visibility: hidden !important;
-	  /* 关键：让浏览器认为这是"非标准视频"从而放弃劫持 */
-	  -webkit-mask-image: -webkit-radial-gradient(white, black);
+
+	  /* 关键：伪装成“非标准视频”以绕过原生接管 */
+	  -webkit-mask-image: -webkit-radial-gradient(circle at center, white 0%, black 70%) !important;
+	  -webkit-mask-size: 100% 100% !important;
+	  -webkit-mask-repeat: no-repeat !important;
+	  -webkit-mask-position: center !important;
+
+	  /* 尺寸与适配 */
 	  object-fit: cover !important;
+	  width: 100% !important;
+	  height: 100% !important;
+	  position: relative !important;
+	  z-index: 1 !important;
+
+	  /* 禁用原生交互 */
+	  -webkit-user-select: none !important;
+	  user-select: none !important;
+	  -webkit-touch-callout: none !important;
+
+	  /* 隐藏所有原生控件（包括可能被注入的） */
+	  pointer-events: none !important;
 	  }
 
-	  /* 隐藏所有可能被注入的原生控件 */
+	  /* 彻底隐藏原生控件面板（vivo 有时会偷偷加） */
+	  video::-webkit-media-controls,
 	  video::-webkit-media-controls-panel,
 	  video::-webkit-media-controls-play-button,
-	  video::-webkit-media-controls-fullscreen-button {
+	  video::-webkit-media-controls-fullscreen-button,
+	  video::-webkit-media-controls-timeline {
 	  display: none !important;
 	  opacity: 0 !important;
+	  visibility: hidden !important;
 	  }
 
+	  /* 防止浏览器自动添加 poster 或封面干扰 */
+	  video::before {
+	  content: "" !important;
+	  display: none !important;
+	  }
+	  
 	  #inputText:focus {
 	  color: #ffffff;
 	  }
