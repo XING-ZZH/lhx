@@ -326,7 +326,7 @@ Module.preRun = Module.preRun || [ ];
         if (dataDownloaded < dataSize || gameZipSize == 0) {
             if (!dataPrompt) {
                 printMessage("");
-                printMessage("Downloading engine...");
+                printMessage("正在加载游戏引擎...");
                 dataPrompt = true;
             }
 
@@ -336,7 +336,7 @@ Module.preRun = Module.preRun || [ ];
 
         if (!gameZipPrompt) {
             printMessage("");
-            printMessage("Downloading game data...");
+            printMessage("正在加载游戏资源...");
             gameZipPrompt = true;
         }
 
