@@ -232,34 +232,7 @@
   </script>
   <script src="renpy-pre.js"></script>
   <script async type="text/javascript" src="renpy.js"></script>
-  <!-- 原生视频覆盖层 -->
-  <video id="web-video-overlay" 
-         style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: 9999; display: none; background: #000;" 
-         playsinline webkit-playsinline x5-video-player-type="h5">
-  </video>
 
-<script>
-      window.RenpyVideoBridge = {
-          play: function(filename, duration) {
-              const video = document.getElementById('web-video-overlay');
-              // 假设你把 mp4 放在了 web_videos 文件夹下
-              video.src = "images/" + filename + ".mp4"; 
-              video.style.display = 'block';
-              video.play().catch(e => console.warn("Auto-play prevented", e));
-
-            // 定时隐藏视频
-              setTimeout(() => {
-                  video.pause();
-                  video.style.display = 'none';
-              }, duration * 1000 + 500);
-          },  
-          stop: function() {
-              const video = document.getElementById('web-video-overlay');
-              video.pause();
-              video.style.display = 'none';
-          }
-      };
-</script>
 </body>
 
 </html>
